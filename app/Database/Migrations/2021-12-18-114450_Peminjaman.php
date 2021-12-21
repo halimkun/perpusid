@@ -33,9 +33,9 @@ class Peminjaman extends Migration
                 "type"       => "VARCHAR",
                 "constraint" => 150
             ],
-            "kode_anggota"      => [
-                "type"       => "VARCHAR",
-                "constraint" => 30
+            "userid"            => [
+                "type"       => "INT",
+                "constraint" => 11
             ],
         ]);
 
