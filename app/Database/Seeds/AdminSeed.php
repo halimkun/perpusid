@@ -38,6 +38,7 @@ class AdminSeed extends Seeder
             'profile'       => "avatar.png",
             'address'       => "Dk. Sampel Rt.01 Rw.02 Ds. Lolong Kec. Karanganyar Keb. Pekalongan Jawa Tengah Indonesia",
             'password_hash' => '$2y$10$P4p.Nw.GBB63hWgIOqJpYufdviIBFtMtlEbfl5lHSOtaUdLnSyYme',
+            'active'        => 1,
             'reset_hash'    => null,
             'reset_at'      => null,
             'reset_expires' => null,
