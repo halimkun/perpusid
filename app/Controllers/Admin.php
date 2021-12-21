@@ -10,14 +10,16 @@ class Admin extends BaseController
     protected $user;
     protected $books;
     protected $kategori;
-    protected $validation;
+    protected $peminjam;
     protected $groups;
+    protected $validation;
 
     public function __construct()
     {
         $this->user       = new \App\Models\UserModel();
         $this->books      = new \App\Models\Buku();
         $this->kategori   = new \App\Models\Kategori();
+        $this->peminjam   = new \App\Models\Peminjaman();
         $this->groups     = new GroupModel();
         $this->validation = \Config\Services::validation();
     }
@@ -91,6 +93,17 @@ class Admin extends BaseController
         } else {
             return redirect()->to(base_url('admin/buku'));
         }
+    }
+
+    public function peminjaman()
+    {
+        $data = [
+            "title"      => "Peminjam Buku | PERPUSID",
+            "segment"    => $this->request->uri->getSegments(),
+            "peminjam"   => $this->peminjam->findAll()
+        ];
+
+        return view("admin/peminjam/index", $data);
     }
 
     public function kategori()

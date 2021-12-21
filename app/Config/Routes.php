@@ -36,14 +36,21 @@ $routes->get('/', 'Home::index');
 // Admin Routes
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
+
 $routes->get('/admin/buku', 'Admin::buku', ['filter' => 'role:admin']);
 $routes->get('/admin/buku/new', 'Admin::buku_baru', ['filter' => 'role:admin']);
 $routes->get('/admin/buku/detail/(:any)', 'Admin::buku_detail/$1', ['filter' => 'role:admin']);
 $routes->get('/admin/buku/edit/(:any)', 'Admin::buku_edit/$1', ['filter' => 'role:admin']);
 $routes->get('/admin/buku/kategori', 'Admin::kategori', ['filter' => 'role:admin']);
+
 $routes->get('/admin/users', 'Admin::users', ['filter' => 'role:admin']);
 $routes->get('/admin/user/new', 'Admin::user_new', ['filter' => 'role:admin']);
 $routes->get('/admin/user/group', 'Admin::group', ['filter' => 'role:admin']);
+
+$routes->get('/admin/peminjaman', 'Admin::peminjaman', ['filter' => 'role:admin']);
+
+
+
 
 $routes->patch('/groups/update', 'Groups::update');
 $routes->delete('/groups/delete', 'Groups::delete');
