@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Pages');
+$routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -31,7 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Pages::index');
+$routes->get('/', 'Home::index');
 
 // Admin Routes
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
@@ -44,7 +44,6 @@ $routes->get('/admin/buku/kategori', 'Admin::kategori', ['filter' => 'role:admin
 $routes->get('/admin/users', 'Admin::users', ['filter' => 'role:admin']);
 $routes->get('/admin/user/new', 'Admin::user_new', ['filter' => 'role:admin']);
 $routes->get('/admin/user/group', 'Admin::group', ['filter' => 'role:admin']);
-
 
 $routes->patch('/groups/update', 'Groups::update');
 $routes->delete('/groups/delete', 'Groups::delete');
