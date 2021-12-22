@@ -268,7 +268,6 @@
 							<ul class="dropdown-menu">
 								<li class=" <?= (end($segment) == 'peminjaman') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman">Semua Peminjam</a></li>
 								<li class=" <?= (end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman/new">Tambah Peminjam</a></li>
-								<li class=" <?= (end($segment) == 'req') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman/req">Pinjaman Request</a></li>
 							</ul>
 						</li>
 						<li class="dropdown <?= (in_array('buku', $segment)) ? 'active' : '' ?>">
