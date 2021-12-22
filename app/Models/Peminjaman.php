@@ -12,4 +12,12 @@ class Peminjaman extends Model
     protected $insertID         = 37129;
     protected $allowedFields    = ['kode_peminjaman', 'tanggal_pinjam', 'tanggal_kembali', 'peminjaman_status', 'kode_buku', 'userid'];
 
+
+    public function updateStts($data, $kode)
+    {
+        $this->set('peminjaman_status', $data);
+        $this->where('kode_peminjaman', $kode);
+        return $this->update();
+    }
+
 }

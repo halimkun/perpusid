@@ -10,21 +10,21 @@ class Peminjaman extends Migration
     {
         $this->forge->addField([
             'id_peminjaman'     => [
-                'type'       => "INT",
-                'constraint' => 11
+                'type'           => "INT",
+                'constraint'     => 11,
+                'auto_increment' => true
             ],
             'kode_peminjaman'   => [
                 'type'       => "VARCHAR",
                 'constraint' => 20
             ],
-            "id_buku" => [
+            "kode_buku" => [
                 "type"       => "VARCHAR",
                 "constraint" => 150,
             ],
             "userid"            => [
                 "type"       => "INT",
                 "constraint" => 11,
-                "unsigned" => true,
             ],
             'tanggal_pinjam'    => [
                 'type'       => "VARCHAR",

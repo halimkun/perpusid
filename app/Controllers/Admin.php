@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Entities\User;
 use Myth\Auth\Authorization\GroupModel;
 
 class Admin extends BaseController
@@ -97,13 +98,44 @@ class Admin extends BaseController
 
     public function peminjaman()
     {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('peminjaman');
+        $builder->select('peminjaman.*, users.username, users.firstname, users.lastname, buku.judul_buku, ');
+        $builder->join('buku', 'peminjaman.kode_buku = buku.kode_buku');
+        $builder->join('users', 'peminjaman.userid = users.id');
+        $q = $builder->get();
+
         $data = [
-            "title"      => "Peminjam Buku | PERPUSID",
-            "segment"    => $this->request->uri->getSegments(),
-            "peminjam"   => $this->peminjam->findAll()
+            "title"    => "Peminjam Buku | PERPUSID",
+            "segment"  => $this->request->uri->getSegments(),
+            "peminjam" => $q->getResult()
         ];
 
         return view("admin/peminjam/index", $data);
+    }
+
+    public function peminjaman_baru()
+    {
+        $data = [
+            "title"    => "Peminjam Buku | PERPUSID",
+            "segment"  => $this->request->uri->getSegments(),
+            "peminjam" => $this->peminjam->findAll(),
+            "users"    => $this->user->withGroup('anggota')->findAll(),
+            "buku"     => $this->books->findAll()
+        ];
+
+        return view("admin/peminjam/add", $data);
+    }
+
+    public function peminjaman_request()
+    {
+        $data = [
+            "title"    => "Peminjam Buku | PERPUSID",
+            "segment"  => $this->request->uri->getSegments(),
+            "peminjam" => $this->peminjam->findAll()
+        ];
+
+        return view("admin/peminjam/req", $data);
     }
 
     public function kategori()
@@ -121,12 +153,12 @@ class Admin extends BaseController
     public function users()
     {
 
-        $db = \Config\Database::connect();
+        $db      = \Config\Database::connect();
         $builder = $db->table('users');
         $builder->select('users.id as userid, email, username, firstname, lastname, phone, name');
         $builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
         $builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
-        $q =$builder->get();
+        $q = $builder->get();
 
         $data = [
             "title"   => "Home | PERPUSID",

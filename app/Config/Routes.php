@@ -48,6 +48,8 @@ $routes->get('/admin/user/new', 'Admin::user_new', ['filter' => 'role:admin']);
 $routes->get('/admin/user/group', 'Admin::group', ['filter' => 'role:admin']);
 
 $routes->get('/admin/peminjaman', 'Admin::peminjaman', ['filter' => 'role:admin']);
+$routes->get('/admin/peminjaman/new', 'Admin::peminjaman_baru', ['filter' => 'role:admin']);
+$routes->get('/admin/peminjaman/req', 'Admin::peminjaman_request', ['filter' => 'role:admin']);
 
 
 

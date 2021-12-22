@@ -42,3 +42,9 @@ $("#table-user").dataTable({
     { "sortable": false, "targets": [4] }
   ]
 });
+
+$("#table-pinjaman").dataTable({
+  "columnDefs": [
+    { "sortable": false, "targets": [5] }
+  ]
+});

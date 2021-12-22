@@ -16,10 +16,7 @@ class User extends MythUser
      * Default attributes.
      * @var array
      */
-    protected $attributes = [
-        'firstname' => 'Guest',
-        'lastname'  => 'User',
-    ];
+    protected $attributes = [];
 
     /**
      * Maps names used in sets and gets against unique
