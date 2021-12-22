@@ -170,7 +170,7 @@
 						</div>
 					</li> -->
 					<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-							<img alt="image" src="/assets/imgs/avatar/<?= user()->profile ?>" class="rounded-circle mr-1">
+							<img alt="image" src="/assets/imgs/avatar/<?= user()->profile ?>" class="rounded-circle mr-1" style="width: 30px; height: 30px; object-fit: cover; object-position: center;">
 							<div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
