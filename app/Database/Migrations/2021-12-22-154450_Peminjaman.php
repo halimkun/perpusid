@@ -17,6 +17,15 @@ class Peminjaman extends Migration
                 'type'       => "VARCHAR",
                 'constraint' => 20
             ],
+            "id_buku" => [
+                "type"       => "VARCHAR",
+                "constraint" => 150,
+            ],
+            "userid"            => [
+                "type"       => "INT",
+                "constraint" => 11,
+                "unsigned" => true,
+            ],
             'tanggal_pinjam'    => [
                 'type'       => "VARCHAR",
                 'constraint' => 20
@@ -29,22 +38,14 @@ class Peminjaman extends Migration
                 'type'       => "INT",
                 'constraint' => 11
             ],
-            "kode_buku"         => [
-                "type"       => "VARCHAR",
-                "constraint" => 150
-            ],
-            "userid"            => [
-                "type"       => "INT",
-                "constraint" => 11
-            ],
         ]);
 
         $this->forge->addKey("id_peminjaman", TRUE);
-        $this->forge->createTable("peminjaman");
+        $this->forge->createTable("peminjaman", true);
     }
 
     public function down()
     {
-        $this->forge->dropTable("peminjaman");
+        $this->forge->dropTable("peminjaman", true);
     }
 }

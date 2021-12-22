@@ -63,6 +63,8 @@ class Buku extends Migration
             ],
         ]);
         $this->forge->addKey("id_buku", TRUE);
+        // $this->forge->addKey('kode_buku');
+
         $this->forge->createTable("buku");
     }
 
