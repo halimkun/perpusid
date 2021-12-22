@@ -36,7 +36,8 @@ class Admin extends BaseController
             "title"   => "Dashboard | PERPUSID",
             "segment" => $this->request->uri->getSegments(),
             "cuser"   => count($this->user->findAll()),
-            "cbooks"  => count($this->books->findAll())
+            "cbooks"  => count($this->books->findAll()),
+            "cpeminjaman" => count($this->peminjam->findAll())
         ];
 
         return view('admin/home', $data);
