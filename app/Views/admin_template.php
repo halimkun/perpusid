@@ -41,67 +41,10 @@
 						<input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
 						<button class="btn" type="submit"><i class="fas fa-search"></i></button>
 						<div class="search-backdrop"></div>
-						<div class="search-result">
-							<div class="search-header">
-								Histories
-							</div>
-							<div class="search-item">
-								<a href="#">How to hack NASA using CSS</a>
-								<a href="#" class="search-close"><i class="fas fa-times"></i></a>
-							</div>
-							<div class="search-item">
-								<a href="#">Kodinger.com</a>
-								<a href="#" class="search-close"><i class="fas fa-times"></i></a>
-							</div>
-							<div class="search-item">
-								<a href="#">#Stisla</a>
-								<a href="#" class="search-close"><i class="fas fa-times"></i></a>
-							</div>
-							<div class="search-header">
-								Result
-							</div>
-							<div class="search-item">
-								<a href="#">
-									<img class="mr-3 rounded" width="30" src="/assets/imgs/products/product-3-50.png" alt="product">
-									oPhone S9 Limited Edition
-								</a>
-							</div>
-							<div class="search-item">
-								<a href="#">
-									<img class="mr-3 rounded" width="30" src="/assets/imgs/products/product-2-50.png" alt="product">
-									Drone X2 New Gen-7
-								</a>
-							</div>
-							<div class="search-item">
-								<a href="#">
-									<img class="mr-3 rounded" width="30" src="/assets/imgs/products/product-1-50.png" alt="product">
-									Headphone Blitz
-								</a>
-							</div>
-							<div class="search-header">
-								Projects
-							</div>
-							<div class="search-item">
-								<a href="#">
-									<div class="search-icon bg-danger text-white mr-3">
-										<i class="fas fa-code"></i>
-									</div>
-									Stisla Admin Template
-								</a>
-							</div>
-							<div class="search-item">
-								<a href="#">
-									<div class="search-icon bg-primary text-white mr-3">
-										<i class="fas fa-laptop"></i>
-									</div>
-									Create a new Homepage Design
-								</a>
-							</div>
-						</div>
 					</div>
 				</form>
 				<ul class="navbar-nav navbar-right">
-					<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+					<!-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
 						<div class="dropdown-menu dropdown-list dropdown-menu-right">
 							<div class="dropdown-header">Messages
 								<div class="float-right">
@@ -225,7 +168,7 @@
 								<a href="#">View All <i class="fas fa-chevron-right"></i></a>
 							</div>
 						</div>
-					</li>
+					</li> -->
 					<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 							<img alt="image" src="/assets/imgs/avatar/<?= user()->profile ?>" class="rounded-circle mr-1">
 							<div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
@@ -266,24 +209,24 @@
 						<li class="dropdown <?= (in_array('peminjaman', $segment)) ? 'active' : '' ?>">
 							<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-address-book"></i> <span>Peminjaman</span></a>
 							<ul class="dropdown-menu">
-								<li class=" <?= (end($segment) == 'peminjaman') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman">Semua Peminjam</a></li>
-								<li class=" <?= (end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman/new">Tambah Peminjam</a></li>
+								<li class=" <?= (in_array('peminjaman', $segment) && end($segment) == 'peminjaman') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman">Semua Peminjam</a></li>
+								<li class=" <?= (in_array('peminjaman', $segment) && end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="/admin/peminjaman/new">Tambah Peminjam</a></li>
 							</ul>
 						</li>
 						<li class="dropdown <?= (in_array('buku', $segment)) ? 'active' : '' ?>">
 							<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-book"></i> <span>Buku</span></a>
 							<ul class="dropdown-menu">
-								<li class=" <?= (end($segment) == 'buku') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku') ?>">Semua Data</a></li>
-								<li class=" <?= (end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku/new') ?>">Tambah baru</a></li>
-								<li class=" <?= (end($segment) == 'kategori') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku/kategori') ?>">Kategori Buku</a></li>
+								<li class=" <?= (in_array('buku', $segment) && end($segment) == 'buku') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku') ?>">Semua Data</a></li>
+								<li class=" <?= (in_array('buku', $segment) && end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku/new') ?>">Tambah baru</a></li>
+								<li class=" <?= (in_array('buku', $segment) && end($segment) == 'kategori') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('/admin/buku/kategori') ?>">Kategori Buku</a></li>
 							</ul>
 						</li>
 						<li class="dropdown <?= (in_array('user', $segment) || in_array('users', $segment)) ? 'active' : '' ?>">
 							<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Users</span></a>
 							<ul class="dropdown-menu">
-								<li class="<?= (end($segment) == 'user' || end($segment) == 'users') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/users') ?>">Semua Data</a></li>
-								<li class="<?= (end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/user/new') ?>">Tambah baru</a></li>
-								<li class="<?= (end($segment) == 'group') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/user/group') ?>">Group User</a></li>
+								<li class="<?= (end($segment) == 'users') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/users') ?>">Semua Data</a></li>
+								<li class="<?= (in_array('user', $segment) && end($segment) == 'new') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/user/new') ?>">Tambah baru</a></li>
+								<li class="<?= (in_array('user', $segment) && end($segment) == 'group') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/user/group') ?>">Group User</a></li>
 							</ul>
 						</li>
 						<li class="menu-header">Settings</li>

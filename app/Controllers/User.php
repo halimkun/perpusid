@@ -132,10 +132,9 @@ class User extends BaseController
     public function edit($uname = null)
     {
         if ($this->request->getMethod() == 'patch') {
-
             $old_data = $this->user->find($this->request->getPost('id'));
             $pict = $this->request->getFile('profile');
-            
+
             $rules = [
                 "id"        => "required",
                 "phone"     => "required" . (($this->request->getPost('phone') == $old_data->phone) ? "" : "|is_unique[users.phone]"),
@@ -153,7 +152,7 @@ class User extends BaseController
             }
 
             if ($pict->getError() == 0) {
-                $rules["profile"] = "required|alpha";
+                $rules["profile"] = "max_size[profile,2024]|is_image[profile]|mime_in[profile,image/jpg,image/png,image/jpeg,image/gif]";
             }
 
             if (!$this->validate($rules)) {
