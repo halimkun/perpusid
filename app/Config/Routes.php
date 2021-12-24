@@ -61,7 +61,7 @@ $routes->get('/u', 'Anggota::index', ['filter' => 'role:admin,anggota']); // ind
 $routes->get('/u/index', 'Anggota::index', ['filter' => 'role:admin,anggota']); // index
 $routes->get('/u/dashboard', 'Anggota::dashboard', ['filter' => 'role:admin,anggota']); // dashboard
 $routes->get('/u/books', 'Anggota::books', ['filter' => 'role:admin,anggota']); // dashboard
-$routes->get('/u/(:any)', 'Anggota::profile/$1', ['filter' => 'role:admin,anggota']); // profile
+$routes->get('/u/profile', 'Anggota::profile', ['filter' => 'role:admin,anggota']); // profile
 
 /*
  * --------------------------------------------------------------------

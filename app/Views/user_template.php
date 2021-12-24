@@ -261,19 +261,18 @@
 					<ul class="sidebar-menu">
 						<li class="menu-header">Dahboard</li>
 						<li class="<?= (end($segment) == 'dashboard') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/dashboard') ?>"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
-						
-                        <li class="menu-header">Profile</li>
-						<li class="<?= (end($segment) == 'profile') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/profile') ?>"><i class="fas fa-user-check"></i> <span>My Profile</span></a></li>
 
 						<li class="menu-header">Aktivitas</li>
 						<li class="dropdown <?= (end($segment) == 'books' || end($segment) == 'history' || end($segment) == 'new') ? 'active' : "" ?>">
 							<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-book"></i> <span>Aktivitas Saya</span></a>
 							<ul class="dropdown-menu">
 								<li class="<?= (end($segment) == 'books') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/books') ?>">Buku Tersedia</a></li>
-								<li class=""><a class="nav-link" href="<?= base_url('/u/history') ?>">History Pinjaman</a></li>
 								<li class=""><a class="nav-link" href="<?= base_url('/u/new') ?>">Pinjam Baru</a></li>
 							</ul>
 						</li>
+
+						<li class="menu-header">Profile</li>
+						<li class="<?= (end($segment) == 'profile') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/profile') ?>"><i class="fas fa-user-check"></i> <span>My Profile</span></a></li>
 
 						<li class="menu-header">Settings</li>
 						<li class=""><a class="nav-link" href="<?= base_url('/u/setting') ?>"><i class="fas fa-cog"></i> <span>General</span></a></li>
