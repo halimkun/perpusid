@@ -37,7 +37,7 @@ class Admin extends BaseController
             "segment" => $this->request->uri->getSegments(),
             "cuser"   => count($this->user->findAll()),
             "cbooks"  => count($this->books->findAll()),
-            "cpeminjaman" => count($this->peminjam->findAll())
+        "cpeminjaman" => count($this->peminjam->findAll())
         ];
 
         return view('admin/home', $data);

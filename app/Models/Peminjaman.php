@@ -20,4 +20,16 @@ class Peminjaman extends Model
         return $this->update();
     }
 
+    public function getPeminjamanByUid($uid)
+    {
+        $this->where('userid', $uid);
+        return $this->findAll();
+    }
+
+    public function getBukuDikembalikanUser($uid, $s)
+    {
+        $this->where(['userid'=>$uid, 'peminjaman_status' => $s]);
+        return $this->findAll();
+    }
+
 }

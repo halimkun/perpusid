@@ -1,4 +1,4 @@
-<?php
+<?php ini_set('date.timezone', 'Asia/Jakarta');
 
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
