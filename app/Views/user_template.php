@@ -263,11 +263,11 @@
 						<li class="<?= (end($segment) == 'dashboard') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/dashboard') ?>"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
 
 						<li class="menu-header">Aktivitas</li>
-						<li class="dropdown <?= (end($segment) == 'books' || end($segment) == 'history' || end($segment) == 'new') ? 'active' : "" ?>">
+						<li class="dropdown <?= (end($segment) == 'books' || end($segment) == 'req') ? 'active' : "" ?>">
 							<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-book"></i> <span>Aktivitas Saya</span></a>
 							<ul class="dropdown-menu">
 								<li class="<?= (end($segment) == 'books') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/books') ?>">Buku Tersedia</a></li>
-								<li class=""><a class="nav-link" href="<?= base_url('/u/new') ?>">Pinjam Baru</a></li>
+								<li class="<?= (end($segment) == 'req') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/books/req') ?>">Pinjam Baru</a></li>
 							</ul>
 						</li>
 

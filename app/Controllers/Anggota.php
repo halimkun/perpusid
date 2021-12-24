@@ -14,9 +14,9 @@ class Anggota extends BaseController
 
     public function __construct()
     {
-        $this->user = new \App\Models\UserModel();
-        $this->buku = new \App\Models\Buku();
-        $this->peminjam   = new \App\Models\Peminjaman();
+        $this->user     = new \App\Models\UserModel();
+        $this->buku     = new \App\Models\Buku();
+        $this->peminjam = new \App\Models\Peminjaman();
     }
 
     public function index()
@@ -34,11 +34,11 @@ class Anggota extends BaseController
         $q = $builder->get();
 
         $data = [
-            "title"     => "User Home | PERPUSID",
-            "segment"   => $this->request->uri->getSegments(),
-            'pinjaman'  => $q->getResult('array'),
-            'dikembalikan'  => $this->peminjam->getBukuDikembalikanUser(user()->id, 1),
-            "now"       => new Time('now', 'Asia/Jakarta')
+            "title"        => "User Home | PERPUSID",
+            "segment"      => $this->request->uri->getSegments(),
+            'pinjaman'     => $q->getResult('array'),
+            'dikembalikan' => $this->peminjam->getBukuDikembalikanUser(user()->id, 1),
+            "now"          => new Time('now', 'Asia/Jakarta')
         ];
 
         return view('user/home', $data);
@@ -47,9 +47,9 @@ class Anggota extends BaseController
     public function profile()
     {
         $data = [
-            "title"     => "Profile Home | PERPUSID",
-            "segment"   => $this->request->uri->getSegments(),
-            "now"       => new Time('now', 'Asia/Jakarta')
+            "title"   => "Profile Home | PERPUSID",
+            "segment" => $this->request->uri->getSegments(),
+            "now"     => new Time('now', 'Asia/Jakarta')
         ];
 
         return view('user/profile', $data);
@@ -58,11 +58,29 @@ class Anggota extends BaseController
     public function books()
     {
         $data = [
-            "title"     => "List Buku | PERPUSID",
-            "segment"   => $this->request->uri->getSegments(),
-            "buku"      => $this->buku->findAll()
+            "title"   => "List Buku | PERPUSID",
+            "segment" => $this->request->uri->getSegments(),
+            "buku"    => $this->buku->findAll()
         ];
 
         return view('user/books', $data);
+    }
+
+    public function req()
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('peminjaman');
+        $builder->select('peminjaman.*, buku.judul_buku,');
+        $builder->join('buku', 'peminjaman.kode_buku = buku.kode_buku');
+        $builder->where(['peminjaman.userid' => user()->id, 'peminjaman.peminjaman_status' => 3]);
+        $q = $builder->get();
+
+        $data = [
+            "title"           => "List Buku | PERPUSID",
+            "segment"         => $this->request->uri->getSegments(),
+            "buku"            => $this->buku->findAll(),
+            'proses_pinjaman' => $q->getResult('array'),
+        ];
+        return view('user/req_buku', $data);
     }
 }
