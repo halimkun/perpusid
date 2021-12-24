@@ -231,15 +231,8 @@
 							<div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<div class="dropdown-title">Logged in 5 min ago</div>
-							<a href="#" class="dropdown-item has-icon">
+							<a href="/u/profile" class="dropdown-item has-icon">
 								<i class="far fa-user"></i> Profile
-							</a>
-							<a href="#" class="dropdown-item has-icon">
-								<i class="fas fa-bolt"></i> Activities
-							</a>
-							<a href="#" class="dropdown-item has-icon">
-								<i class="fas fa-cog"></i> Settings
 							</a>
 							<div class="dropdown-divider"></div>
 							<a href="/logout" class="dropdown-item has-icon text-danger">
@@ -273,9 +266,6 @@
 
 						<li class="menu-header">Profile</li>
 						<li class="<?= (end($segment) == 'profile') ? 'active' : "" ?>"><a class="nav-link" href="<?= base_url('/u/profile') ?>"><i class="fas fa-user-check"></i> <span>My Profile</span></a></li>
-
-						<li class="menu-header">Settings</li>
-						<li class=""><a class="nav-link" href="<?= base_url('/u/setting') ?>"><i class="fas fa-cog"></i> <span>General</span></a></li>
 					</ul>
 				</aside>
 			</div>
