@@ -23,11 +23,6 @@ class User extends BaseController
         $this->config = config("Auth");
     }
 
-    public function index()
-    {
-        return redirect()->to('admin/users');
-    }
-
     public function register()
     {
         if ($this->request->getMethod() == 'post') {

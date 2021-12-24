@@ -20,11 +20,6 @@ class Buku extends BaseController
         $this->validation = \Config\Services::validation();
     }
 
-    public function index()
-    {
-        return redirect()->to('admin/buku');
-    }
-
     public function update()
     {
         if ($this->request->getFile('cover')->getError() == 4) {
@@ -191,6 +186,7 @@ class Buku extends BaseController
 
         $data = [
             'kode_buku'     => $this->request->getPost('kode') . uniqid(),
+            'stok_buku'     => $this->request->getPost('stok'),
             'judul_buku'    => $this->request->getPost('judul'),
             'sinopsis'      => $this->request->getPost('sinopsis'),
             'kategori'      => $this->request->getPost('kategori'),

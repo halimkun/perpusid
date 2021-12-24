@@ -28,8 +28,7 @@ class Peminjaman extends Model
 
     public function getBukuDikembalikanUser($uid, $s)
     {
-        $this->where(['userid'=>$uid, 'peminjaman_status' => $s]);
+        $this->where(['userid' => $uid, 'peminjaman_status' => $s]);
         return $this->findAll();
     }
-
 }

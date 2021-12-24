@@ -101,7 +101,7 @@ class Admin extends BaseController
     {
         $db      = \Config\Database::connect();
         $builder = $db->table('peminjaman');
-        $builder->select('peminjaman.*, users.username, users.firstname, users.lastname, buku.judul_buku, ');
+        $builder->select('peminjaman.*, users.username, users.firstname, users.lastname, buku.judul_buku, buku.kode_buku');
         $builder->join('buku', 'peminjaman.kode_buku = buku.kode_buku');
         $builder->join('users', 'peminjaman.userid = users.id');
         $q = $builder->get();

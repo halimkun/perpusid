@@ -10,7 +10,7 @@ class Buku extends Model
     protected $primaryKey       = 'id_buku';
     protected $useSoftDeletes   = true;
     protected $insertID         = 983290;
-    protected $allowedFields    = ["kode_buku","judul_buku", "sinopsis", "kategori","penulis_buku","penerbit_buku","tahun_terbit", "cover_buku"];
+    protected $allowedFields    = ["kode_buku", "stok_buku", "judul_buku", "sinopsis", "kategori", "penulis_buku", "penerbit_buku", "tahun_terbit", "cover_buku"];
 
     // Dates
     protected $useTimestamps = true;
@@ -33,11 +33,28 @@ class Buku extends Model
         $builder = $this->db->table($this->table);
         return $builder->update($data, ["kode_buku" => $data['kode_buku']]);
     }
-    
+
     public function delBuku($kode)
     {
         $builder = $this->db->table($this->table);
         return $builder->delete(["kode_buku" => $kode]);
     }
 
+    public function stokUp($kode, $stok)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('buku');
+        $builder->set("stok_buku", $stok);
+        $builder->where('kode_buku', $kode);
+        return $builder->update();
+    }
+
+    public function stokDown($kode, $stok)
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('buku');
+        $builder->set("stok_buku", $stok);
+        $builder->where('kode_buku', $kode);
+        return $builder->update(); 
+    }
 }

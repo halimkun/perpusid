@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Models\Buku as BukuModel;
 use App\Models\Peminjaman as ModelsPeminjaman;
 
 class Peminjaman extends BaseController
 {
     protected $peminjam;
+    protected $buku;
 
     public function __construct()
     {
         $this->peminjam = new ModelsPeminjaman();
+        $this->buku     = new BukuModel();
     }
 
     public function new()
@@ -36,21 +39,36 @@ class Peminjaman extends BaseController
             $kembali = date('Y-m-d', strtotime($now . '+7 day'));
         }
 
-
         /** status peminjaman
          * 1 dikembalikan
          * 2 dipinjamkan
          * 3 proses
          * 0 ditolak 
          **/
-        $data = [
-            'kode_peminjaman'   => uniqid(),
-            'kode_buku'         => $this->request->getPost('buku'),
-            'userid'            => $this->request->getPost('user'),
-            'tanggal_pinjam'    => $now,
-            'tanggal_kembali'   => $kembali,
-            'peminjaman_status' => 2
-        ];
+        if (in_groups('anggota')) {
+            $data = [
+                'kode_peminjaman'   => uniqid(),
+                'kode_buku'         => $this->request->getPost('buku'),
+                'userid'            => $this->request->getPost('diu'),
+                'tanggal_pinjam'    => $now,
+                'tanggal_kembali'   => $kembali,
+                'peminjaman_status' => 3
+            ];
+
+            $rules = [
+                'buku'  => 'required',
+                'diu'  => 'required',
+            ];
+        } else {
+            $data = [
+                'kode_peminjaman'   => uniqid(),
+                'kode_buku'         => $this->request->getPost('buku'),
+                'userid'            => $this->request->getPost('user'),
+                'tanggal_pinjam'    => $now,
+                'tanggal_kembali'   => $kembali,
+                'peminjaman_status' => 2
+            ];
+        }
 
         // lakukan validasi
         if (!$this->validate($rules)) {
@@ -63,7 +81,12 @@ class Peminjaman extends BaseController
         }
 
         session()->setFlashdata('success', 'Peminjam berhasil ditambahkan');
-        return redirect()->to('/admin/peminjaman');
+
+        if (in_groups('anggota')) {
+            return redirect()->to('/u/books/req');
+        } else {
+            return redirect()->to('/admin/peminjaman');
+        }
     }
 
     public function update_stts()
@@ -72,14 +95,29 @@ class Peminjaman extends BaseController
             return redirect()->to('/admin/peminjaman');
         }
 
-        // $data = [ 'peminjaman_status' => $this->request->getPost('status') ];
-        if (!$this->peminjam->updateStts($this->request->getPost('status'), $this->request->getPost('kode'))) {
+        if ($this->peminjam->updateStts($this->request->getPost('status'), $this->request->getPost('kode'))) {
+            
+            // get current stok
+            $current_stok = $this->buku->where(['kode_buku' => $this->request->getPost('kode_buku')])->first();
+            $stok_up = $current_stok['stok_buku'] + 1;
+            $stok_down = $current_stok['stok_buku'] - 1;
+
+            if ($this->request->getPost('status') == 1) {
+                $this->buku->stokUp($this->request->getPost('kode_buku'), $stok_up);
+            } elseif ($this->request->getPost('status') == 2) {
+                $this->buku->stokDown($this->request->getPost('kode_buku'), $stok_down);
+            }
+
+        } else {
             session()->setFlashdata('error', 'Gagal update status peminjaman');
             return redirect()->to('/admin/peminjaman');
         }
 
         session()->setFlashdata('success', 'Berhasil update status peminjaman');
         return redirect()->to('/admin/peminjaman');
+    }
 
+    public function stokUp($kode, $cstok)
+    {
     }
 }

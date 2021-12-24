@@ -21,11 +21,24 @@
                         <div class="tab-pane fade active show" id="home4" role="tabpanel" aria-labelledby="home-tab4">
                             <form action="/buku/add" method="post" enctype="multipart/form-data">
                                 <?= csrf_field() ?>
-                                <div class="mb-3">
-                                    <label for="kode" class="form-label"><b>Kode buku</b></label>
-                                    <input type="text" name="kode" id="kode" readonly class="form-control <?= $validation->hasError('kode') ? 'is-invalid' : '' ?>">
-                                    <div class="invalid-feedback">
-                                        <?= $validation->getError('kode'); ?>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="mb-3">
+                                            <label for="kode" class="form-label"><b>Kode buku</b></label>
+                                            <input type="text" name="kode" id="kode" readonly class="form-control <?= $validation->hasError('kode') ? 'is-invalid' : '' ?>">
+                                            <div class="invalid-feedback">
+                                                <?= $validation->getError('kode'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="mb-3">
+                                            <label for="stok" class="form-label"><b>Stok Buku</b></label>
+                                            <input required type="number" name="stok" id="stok" min="0" class="form-control <?= $validation->hasError('stok') ? 'is-invalid' : '' ?>">
+                                            <div class="invalid-feedback">
+                                                <?= $validation->getError('stok'); ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">

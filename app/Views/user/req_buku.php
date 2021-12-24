@@ -8,7 +8,10 @@
                 <h4>Tambah Peminjam Buku</h4>
             </div>
             <div class="card-body">
-                <form action="" method="post">
+                <form action="/peminjaman/new" method="post">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="from" value="user">
+                    <input type="hidden" name="diu" value="<?= user()->id ?>">
                     <div class="form-group">
                         <label for="buku" class="control-label">Buku</label>
                         <select required name="buku" id="buku" class="select2 custom-select">

@@ -100,6 +100,7 @@
             </tbody>
         </table>
 
+        
         <?php foreach ($peminjam as $pem) : ?>
             <form action="/peminjaman/update_stts" class="modal-part" id="eslif<?= $pem->kode_peminjaman ?>" method="post">
                 <blockquote>
@@ -108,6 +109,7 @@
                 </blockquote>
                 <input type="hidden" name="_method" value="patch">
                 <input type="hidden" name="kode" value="<?= $pem->kode_peminjaman ?>">
+                <input type="hidden" name="kode_buku" value="<?= $pem->kode_buku ?>">
                 <div class="form-group">
                     <label for="status" class="control-label">Status Peminjam</label>
                     <select name="status" id="status" class="form-control">
