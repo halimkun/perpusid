@@ -18,7 +18,7 @@ class Anggota extends BaseController
 
     public function index()
     {
-        return redirect()->to(base_url());
+        return redirect()->to('/u/dashboard');
     }
 
     public function dashboard()
