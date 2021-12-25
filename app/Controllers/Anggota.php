@@ -49,7 +49,8 @@ class Anggota extends BaseController
         $data = [
             "title"   => "Profile Home | PERPUSID",
             "segment" => $this->request->uri->getSegments(),
-            "now"     => new Time('now', 'Asia/Jakarta')
+            "now"     => new Time('now', 'Asia/Jakarta'),
+            "uagent"  => $this->request->getUserAgent()
         ];
 
         return view('user/profile', $data);
