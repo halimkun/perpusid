@@ -23,6 +23,17 @@ class User extends BaseController
         $this->config = config("Auth");
     }
 
+    public function index()
+    {
+        if (logged_in() && in_groups('admin')) {
+            return redirect()->to('/admin');
+        } elseif (logged_in() && in_groups('anggota')) {
+            return redirect()->to('/u/dashboard');
+        } else {
+            return redirect()->to('/');
+        }
+    }
+
     public function register()
     {
         if ($this->request->getMethod() == 'post') {
@@ -187,6 +198,11 @@ class User extends BaseController
             $this->user->save($data);
 
             session()->setFlashdata('success', 'User Berhasil Diubah!');
+            
+            if ($this->request->getPost('from') == 'user') {
+                return redirect()->to(base_url('u/profile'));
+            }
+
             return redirect()->to(base_url('user'));
         } else {
             if (!$uname == null) {
