@@ -46,25 +46,36 @@
                 </ul>
             </div>
             <ul class="navbar-nav navbar-right ml-auto">
-                <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img alt="image" src="/assets/imgs/avatar/avatar-1.png" class="rounded-circle mr-1">
-                        <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                        <?php if (logged_in()) : ?>
+                            <img alt="image" src="/assets/imgs/avatar/<?= user()->profile ?>" class="rounded-circle mr-1" style="object-fit: cover;object-position: center;height: 30px;">
+                            <div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
+                        <?php else : ?>
+                            Account
+                        <?php endif ?>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-title">Logged in 5 min ago</div>
-                        <a href="features-profile.html" class="dropdown-item has-icon">
-                            <i class="far fa-user"></i> Profile
-                        </a>
-                        <a href="features-activities.html" class="dropdown-item has-icon">
-                            <i class="fas fa-bolt"></i> Activities
-                        </a>
-                        <a href="features-settings.html" class="dropdown-item has-icon">
-                            <i class="fas fa-cog"></i> Settings
-                        </a>
+                        <?php if (logged_in()) : ?>
+                            <a href="/user" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Profile
+                            </a>
+                        <?php else : ?>
+                            <a href="/register" class="dropdown-item has-icon">
+                                <i class="far fa-user"></i> Register
+                            </a>
+                        <?php endif ?>
                         <div class="dropdown-divider"></div>
-                        <a href="<?= base_url('logout') ?>" class="dropdown-item has-icon text-danger">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
+                        <?php if (logged_in()) : ?>
+                            <a href="<?= base_url('logout') ?>" class="dropdown-item has-icon text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        <?php else : ?>
+                            <a href="<?= base_url('login') ?>" class="dropdown-item has-icon text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Login
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </li>
             </ul>
@@ -105,7 +116,7 @@
                 </ul>
             </div>
         </nav>
-        
+
         <div class="d-sm-flex align-items-center justify-content-between w-100 h-100" <?= ($uagent->isMobile()) ? 'style="margin-top: 100px;"' : '' ?>>
             <div class="col-md-4 mx-auto mb-4 mb-sm-0 headline">
                 <h1 class="display-4 my-4 font-weight-bold">Enter Your <span style="color: #9B5DE5;">Headline Here</span></h1>
