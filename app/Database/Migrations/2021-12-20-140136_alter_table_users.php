@@ -15,7 +15,7 @@ class Migration_alter_table_users extends Migration
             'tgl_lahir' => ['type' => 'DATE', 'after' => 'lastname'],
             'phone'     => ['type' => 'VARCHAR', 'constraint' => 15, 'after' => 'tgl_lahir'],
             'gender'    => ['type' => 'VARCHAR', 'constraint' => 2, 'after' => 'phone'],
-            'profile'   => ['type' => 'VARCHAR', 'constraint' => 100, 'after' => 'gender'],
+            'profile'   => ['type' => 'VARCHAR', 'constraint' => 100, 'after' => 'gender', 'default' => 'avatar.png'],
             'address'   => ['type' => 'VARCHAR', 'constraint' => 300, 'after' => 'profile'],
         ];
         $this->forge->addColumn('users', $fields);

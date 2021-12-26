@@ -52,9 +52,12 @@ $routes->get('/admin/peminjaman/new', 'Admin::peminjaman_baru', ['filter' => 'ro
 $routes->get('/admin/peminjaman/req', 'Admin::peminjaman_request', ['filter' => 'role:admin']);
 
 
-
 $routes->patch('/groups/update', 'Groups::update');
 $routes->delete('/groups/delete', 'Groups::delete');
+
+// Registration
+$routes->get('register', 'AuthController::register', ['as' => 'register']);
+$routes->post('register', 'AuthController::attemptRegister');
 
 // User Routes
 $routes->get('/u', 'Anggota::index', ['filter' => 'role:admin,anggota']); // index

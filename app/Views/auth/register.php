@@ -3,11 +3,10 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
-            <div class="card card-primary">
+            <div class="card card-primary shadow">
                 <div class="card-header">
                     <h4>PERPUS<span class="text-primary">ID</span> <span class="font-weight-light">REGISTER</span></h4>
                 </div>
-
                 
                 <div class="card-body">
 
@@ -17,12 +16,12 @@
                         <?= csrf_field() ?>
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="phone">First Name</label>
-                                <input id="phone" type="text" placeholder="First name" class="form-control" name="phone" autofocus>
+                                <label for="firstname">First Name</label>
+                                <input id="firstname" type="text" placeholder="First name" value="<?= old('firstname') ?>" class="form-control" name="firstname" autofocus>
                             </div>
                             <div class="form-group col-6">
-                                <label for="gender">Last Name</label>
-                                <input id="gender" type="text" placeholder="Last name" class="form-control" name="lastname">
+                                <label for="lastname">Last Name</label>
+                                <input id="lastname" type="text" placeholder="Last name" value="<?= old('lastname') ?>" class="form-control" name="lastname">
                             </div>
                         </div>
 

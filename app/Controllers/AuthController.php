@@ -154,11 +154,13 @@ class AuthController extends Controller
 
 		// Validate basics first since some password rules rely on these fields
 		$rules = [
-			'username' => 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
-			'email'    => 'required|valid_email|is_unique[users.email]',
+			'username' 	=> 'required|alpha_numeric_space|min_length[3]|max_length[30]|is_unique[users.username]',
+			'email'    	=> 'required|valid_email|is_unique[users.email]',
+			'firstname'	=> 'required|alpha_numeric_space',
+			'lastname'	=> 'required|alpha_numeric_space'
 		];
 
-		if (! $this->validate($rules))
+		if (!$this->validate($rules))
 		{
 			return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
 		}
@@ -177,6 +179,7 @@ class AuthController extends Controller
 		// Save the user
 		$allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
 		$user = new User($this->request->getPost($allowedPostFields));
+		$user->profile = 'avatar.png';
 
 		$this->config->requireActivation === null ? $user->activate() : $user->generateActivateHash();
 
@@ -185,7 +188,7 @@ class AuthController extends Controller
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
 
-		if (! $users->save($user))
+		if (!$users->save($user))
 		{
 			return redirect()->back()->withInput()->with('errors', $users->errors());
 		}
@@ -195,7 +198,7 @@ class AuthController extends Controller
 			$activator = service('activator');
 			$sent = $activator->send($user);
 
-			if (! $sent)
+			if (!$sent)
 			{
 				return redirect()->back()->withInput()->with('error', $activator->error() ?? lang('Auth.unknownError'));
 			}
