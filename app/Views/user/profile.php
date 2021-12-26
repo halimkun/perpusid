@@ -8,8 +8,10 @@ $now = new DateTime($now->toDateString());
 $age = $date->diff($now);
 ?>
 
-<?php if (user()->phone[0] == 0) {
+<?php if (user()->phone != null && user()->phone[0] == 0) {
     $tel = str_replace(user()->phone[0], '62', user()->phone);
+} else {
+    $tel = user()->phone;
 } ?>
 
 <div class="card shadow">
