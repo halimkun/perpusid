@@ -30,14 +30,27 @@ class Admin extends BaseController
         return redirect()->to(base_url('admin/dashboard'));
     }
 
+
+    /** status peminjaman
+     * 1 dikembalikan
+     * 2 dipinjamkan
+     * 3 proses
+     * 0 ditolak 
+     **/
     public function dashboard()
     {
+
         $data = [
-            "title"   => "Dashboard | PERPUSID",
-            "segment" => $this->request->uri->getSegments(),
-            "cuser"   => count($this->user->findAll()),
-            "cbooks"  => count($this->books->findAll()),
-        "cpeminjaman" => count($this->peminjam->findAll())
+            "title"        => "Dashboard | PERPUSID",
+            "segment"      => $this->request->uri->getSegments(),
+            "cuser"        => count($this->user->findAll()),
+            "cbooks"       => count($this->books->findAll()),
+            "cpeminjaman"  => count($this->peminjam->findAll()),
+            "mstat"        => $this->peminjam->monthStat(),
+            'dikembalikan' => $this->peminjam->getByStatus(1),
+            'dipinjamkan'  => $this->peminjam->getByStatus(2),
+            'proses'       => $this->peminjam->getByStatus(3),
+            'ditolak'      => $this->peminjam->getByStatus(0),
         ];
 
         return view('admin/home', $data);
@@ -139,6 +152,29 @@ class Admin extends BaseController
         return view("admin/peminjam/req", $data);
     }
 
+    public function peminjaman_detail($kode = null)
+    {
+        if ($kode != null) {
+            $db      = \Config\Database::connect();
+            $builder = $db->table('peminjaman');
+            $builder->select('peminjaman.*, users.username, users.firstname, users.lastname, buku.judul_buku, buku.kode_buku, buku.penulis_buku, buku.penerbit_buku, buku.tahun_terbit');
+            $builder->join('buku', 'peminjaman.kode_buku = buku.kode_buku');
+            $builder->join('users', 'peminjaman.userid = users.id');
+            $builder->where('kode_peminjaman', $kode);
+            $q = $builder->get();
+
+            $data = [
+                "title"    => "Detail Peminjam Buku | PERPUSID",
+                "segment"  => $this->request->uri->getSegments(),
+                "peminjam" => $q->getFirstRow()
+            ];
+
+            return view("admin/peminjam/detail", $data);
+        }
+
+        return redirect()->to('/admin/peminjaman');
+    }
+
     public function kategori()
     {
         $data = [
@@ -185,7 +221,6 @@ class Admin extends BaseController
     public function group()
     {
         if ($this->request->getMethod() == 'post') {
-            
         } else {
             $data = [
                 "title"      => "Add New User | PERPUSID",
