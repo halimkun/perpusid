@@ -12,12 +12,12 @@ class AdminSeed extends Seeder
         // Group Data
         $auth_groups = [
             [
-                "id"          => 49328,
+                "id"          => 1,
                 "name"        => 'admin',
                 "description" => 'site administration'
             ],
             [
-                "id"          => 49329,
+                "id"          => 2,
                 "name"        => 'anggota',
                 "description" => 'general user'
             ],
@@ -27,7 +27,7 @@ class AdminSeed extends Seeder
 
         // User Data
         $users = [
-            'id'            => 64283,
+            'id'            => 1,
             'firstname'     => "Faisal",
             'lastname'      => "Halim",
             'email'         => "ffaisalhalim@gmail.com",
@@ -39,9 +39,9 @@ class AdminSeed extends Seeder
             'address'       => "Dk. Sampel Rt.01 Rw.02 Ds. Lolong Kec. Karanganyar Keb. Pekalongan Jawa Tengah Indonesia",
             'password_hash' => '$2y$10$P4p.Nw.GBB63hWgIOqJpYufdviIBFtMtlEbfl5lHSOtaUdLnSyYme',
             'active'        => 1,
-            'reset_hash'    => null,
-            'reset_at'      => null,
-            'reset_expires' => null,
+            'created_at'    => "2021-11-12 23:34:35-06:00",
+            'updated_at'    => "2021-11-12 23:34:35-06:00",
+            'deleted_at'    => NULL
             // 'password'      => "04062001",
         ];
         // $data = new EntitiesUser($users);
@@ -52,8 +52,8 @@ class AdminSeed extends Seeder
 
         // auth_groups_users Data
         $auth_groups_users = [
-            "group_id" => 49328,
-            "user_id"  => 64283
+            "group_id" => 1,
+            "user_id"  => 1
         ];
         $this->db->table('auth_groups_users')->insert($auth_groups_users);
     }

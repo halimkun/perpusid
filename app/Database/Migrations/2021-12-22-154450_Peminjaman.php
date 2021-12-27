@@ -27,12 +27,10 @@ class Peminjaman extends Migration
                 "constraint" => 11,
             ],
             'tanggal_pinjam'    => [
-                'type'       => "VARCHAR",
-                'constraint' => 20
+                'type'       => "DATE",
             ],
             'tanggal_kembali'   => [
-                'type'       => "VARCHAR",
-                'constraint' => 20
+                'type'       => "DATE",
             ],
             'peminjaman_status' => [
                 'type'       => "INT",
