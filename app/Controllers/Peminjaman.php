@@ -89,6 +89,27 @@ class Peminjaman extends BaseController
         }
     }
 
+    public function update()
+    {
+        if ($this->request->getMethod() == 'get') {
+            return redirect()->to('/admin/peminjaman');
+        }
+
+        $data = [
+            'id_peminjam'     => $this->request->getPost('peminjaman'),
+            'tanggal_pinjam'  => $this->request->getPost('tanggal_pinjam'),
+            'tanggal_kembali' => $this->request->getPost('tanggal_kembali')
+        ];
+
+        if (!$this->peminjam->update($this->request->getPost('peminjaman'), $data)) {
+            session()->setFlashdata('error', 'Gagal update peminjaman');
+            return redirect()->to('/admin/peminjaman/'.$this->request->getPost('kode'));
+        }
+
+        session()->setFlashdata('success', 'Berhasil update peminjaman');
+        return redirect()->to('/admin/peminjaman/'.$this->request->getPost('kode'));
+    }
+
     public function update_stts()
     {
         if ($this->request->getMethod() == 'get') {
@@ -114,7 +135,7 @@ class Peminjaman extends BaseController
         }
 
         session()->setFlashdata('success', 'Berhasil update status peminjaman');
-        return redirect()->to('/admin/peminjaman');
+        return redirect()->to('/admin/peminjaman/'.$this->request->getPost('kode'));
     }
 
     public function stokUp($kode, $cstok)
