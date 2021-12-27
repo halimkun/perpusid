@@ -3,7 +3,6 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
-use App\Entities\User as EntitiesUser;
 use App\Models\UserModel;
 
 class UserSeed extends Seeder
@@ -14,13 +13,12 @@ class UserSeed extends Seeder
         $user = new UserModel();
         $faker = \Faker\Factory::create('id_ID');
 
-        for ($i = 2; $i < 50; $i++) {
+        for ($i = 2; $i < 100; $i++) {
             $gender = $faker->randomElement(['male', 'female']);
             $jk     = $faker->randomElement(['L', 'P']);
             $join   = $faker->dateTimeThisYear();
 
-            $user->withGroup('anggota')->insert([
-                'id'            => $i,
+            $user->withGroup('anggota')->save([
                 'email'         => "user$i@gmail.com",
                 'username'      => "user$i",
                 'firstname'     => $faker->firstName($gender),

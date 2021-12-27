@@ -30,7 +30,7 @@ class PeminjamanSeed extends Seeder
         $peminjam = new Peminjaman();
         $faker    = \Faker\Factory::create('id_ID');
 
-        for ($i = 1; $i < 27; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $tgl_pinjam  = new Time("2021-12-$i", 'Asia/Jakarta');
             $tgl_kembali = $tgl_pinjam->addDays(7);
             
@@ -48,7 +48,6 @@ class PeminjamanSeed extends Seeder
                 ]);
             }
         }
-
 
         /** status peminjaman
          * 1 dikembalikan
