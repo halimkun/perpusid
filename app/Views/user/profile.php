@@ -8,12 +8,6 @@ $now = new DateTime($now->toDateString());
 $age = $date->diff($now);
 ?>
 
-<?php if (user()->phone != null && user()->phone[0] == 0) {
-    $tel = str_replace(user()->phone[0], '62', user()->phone);
-} else {
-    $tel = user()->phone;
-} ?>
-
 <div class="card shadow">
     <div class="card-body p-5">
         <div class="row">
@@ -33,7 +27,7 @@ $age = $date->diff($now);
 
                 <div class="mb-3 mt-4 text-muted"><strong>User Details</strong></div>
                 <div class="mb-3"><i class="far fa-envelope mr-2"></i><a href="mailto:<?= user()->email ?>"><?= user()->email ?></a></div>
-                <div class="mb-3"><i class="fa fa-phone mr-2"></i><a href="tel:+<?= $tel ?>"><?= user()->phone ?></a></div>
+                <div class="mb-3"><i class="fa fa-phone mr-2"></i><a href="tel:+<?= user()->phone ?>"><?= user()->phone ?></a></div>
                 <div class="mb-3"><i class="fa fa-birthday-cake mr-2"></i><?= user()->tgl_lahir ?></div>
                 <div class="mb-3"><i class="fa fa-map-marker-alt mr-2"></i><?= user()->address ?></div>
             </div>
