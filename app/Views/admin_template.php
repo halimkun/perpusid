@@ -174,15 +174,8 @@
 							<div class="d-sm-none d-lg-inline-block">Hi, <?= user()->username ?></div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<div class="dropdown-title">Logged in 5 min ago</div>
-							<a href="#" class="dropdown-item has-icon">
+							<a href="/user/detail/<?= user()->username ?>" class="dropdown-item has-icon">
 								<i class="far fa-user"></i> Profile
-							</a>
-							<a href="#" class="dropdown-item has-icon">
-								<i class="fas fa-bolt"></i> Activities
-							</a>
-							<a href="#" class="dropdown-item has-icon">
-								<i class="fas fa-cog"></i> Settings
 							</a>
 							<div class="dropdown-divider"></div>
 							<a href="<?= base_url('logout') ?>" class="dropdown-item has-icon text-danger">
@@ -229,8 +222,8 @@
 								<li class="<?= (in_array('user', $segment) && end($segment) == 'group') ? 'active' : '' ?>"><a class="nav-link" href="<?= base_url('admin/user/group') ?>">Group User</a></li>
 							</ul>
 						</li>
-						<li class="menu-header">Settings</li>
-						<li class=""><a class="nav-link" href="<?= base_url('setting') ?>"><i class="fas fa-cog"></i> <span>General</span></a></li>
+						<!-- <li class="menu-header">Settings</li>
+						<li class=""><a class="nav-link" href="<?= base_url('setting') ?>"><i class="fas fa-cog"></i> <span>General</span></a></li> -->
 					</ul>
 				</aside>
 			</div>
@@ -260,6 +253,7 @@
 	<script src="/assets/js/stisla.js"></script>
 
 	<!-- JS Libraies -->
+	<script src="/assets/modules/chart.min.js"></script>
 	<script src="/assets/modules/cleave-js/dist/cleave.min.js"></script>
 	<script src="/assets/modules/cleave-js/dist/addons/cleave-phone.id.js"></script>
 	<script src="/assets/modules/summernote/summernote-bs4.min.js"></script>

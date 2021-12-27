@@ -31,4 +31,26 @@ class Peminjaman extends Model
         $this->where(['userid' => $uid, 'peminjaman_status' => $s]);
         return $this->findAll();
     }
+
+    public function getByStatus($stts)
+    {
+        $this->where('peminjaman_status', $stts);
+        return $this->findAll();
+    }
+
+    public function getByKode($kode)
+    {
+        $this->where('kode_peminjaman', $kode);
+        return $this->first();
+    }
+
+    public function monthStat()
+    {
+        $this->select(['MONTH(tanggal_pinjam) AS bulan', 'COUNT(tanggal_pinjam) AS jml']);
+        $this->where('tanggal_pinjam >= NOW() - INTERVAL 1 YEAR');
+        $this->groupBy('MONTH(tanggal_pinjam)');
+        $q = $this->get();
+
+        return $q->getResultArray();
+    }
 }
