@@ -72,8 +72,6 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                         <button onclick="location.href='/user/edit/<?= $u['username'] ?>';" class="dropdown-item">Edit</button>
-                                        <button class="dropdown-item sr<?= md5(md5($u['userid'])) ?>">Set Role</button>
-                                        <button class="dropdown-item" type="button" data-confirm="Woops . . !|Apakah anda yakin akan menghapus jurusan <hr> <h5><?= $u['firstname'] ?> ( <?= $u['username'] ?> )</h5>" data-confirm-yes='$(document).ready(function() {$("#ilno<?= md5(md5($u['userid'])) ?>").submit();})'>Hapus</button>
                                     </div>
                                 </div>
                             </td>
@@ -81,41 +79,6 @@
                     <?php endforeach ?>
                 </tbody>
             </table>
-            <?php foreach ($users as $usr) : ?>
-                <form action="/user/delete" method="post" id="ilno<?= md5(md5($usr['userid'])) ?>">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="id" value="<?= $usr['userid'] ?>">
-                </form>
-
-                <div class="modal-part" id="ha<?= md5(md5(md5(md5($usr['userid'])))) ?>">
-                    <form action="/user/changeGroup" method="post">
-                        <?= csrf_field() ?>
-                        <input type="hidden" name="user_id" value="<?= $usr['userid'] ?>">
-                        <div class="form-group">
-                            <div class="control-center">Pilih Role</div>
-                            <select name="group_id" id="role" class="custom-select">
-                                <option>Pilih Role Baru</option>
-                                <?php foreach ($groups as $g) : ?>
-                                    <option value="<?= $g->id ?>"><?= $g->name ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </form>
-                </div>
-                <script>
-                    $(document).ready(function() {
-                        $(".sr<?= md5(md5($usr['userid'])) ?>").fireModal({
-                            title: "Update Role <?= $usr['username'] ?>",
-                            body: $("#ha<?= md5(md5(md5(md5($usr['userid'])))) ?>"),
-                            center: true
-                        })
-                    })
-                </script>
-            <?php endforeach ?>
         </div>
     </div>
 </div>

@@ -123,10 +123,11 @@ class User extends BaseController
         if (!$uname == null) {
 
             $data = [
-                "title"         => "Detail, Edit User | PERPUSID",
-                "segment"       => $this->request->uri->getSegments(),
-                "validation"    => $this->validation,
-                "user"          => $this->user->getUserByUsername($uname),
+                "title"      => "Detail, Edit User | PERPUSID",
+                "segment"    => $this->request->uri->getSegments(),
+                "validation" => $this->validation,
+                "user"       => $this->user->getUserByUsername($uname),
+                "groups"     => $this->group->findAll()
             ];
 
             return view('admin/user/detail', $data);
@@ -181,7 +182,7 @@ class User extends BaseController
                 'address'   => $this->request->getPost('address'),
                 // 'password'  => (empty($this->request->getPost('password')) ? $old_data->password_hash : $this->request->getPost('password')),
             ];
-            
+
             if (!empty($this->request->getPost('password'))) {
                 $data['password'] = $this->request->getPost('password');
             }
@@ -198,12 +199,12 @@ class User extends BaseController
             $this->user->save($data);
 
             session()->setFlashdata('success', 'User Berhasil Diubah!');
-            
+
             if ($this->request->getPost('from') == 'user') {
                 return redirect()->to(base_url('u/profile'));
             }
 
-            return redirect()->to(base_url('user'));
+            return redirect()->to(base_url('admin/users'));
         } else {
             if (!$uname == null) {
 
@@ -221,10 +222,10 @@ class User extends BaseController
         }
     }
 
-    public function delete()
+    public function delete($id = null)
     {
-        if ($this->request->getMethod() == 'delete') {
-            if ($this->group->removeUserFromAllGroups($this->request->getPost('id')) && $this->user->delete($this->request->getPost('id'))) {
+        if ($id !== null) {
+            if ($this->group->removeUserFromAllGroups($id) && $this->user->delete($id)) {
                 return redirect()->to('/admin/users');
             }
             return redirect()->to('/admin/users');

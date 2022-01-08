@@ -48,11 +48,9 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="col-md-5">
         <div class="card card-primary">
             <div class="card-header">
-                <h4 style="font-family: monospace;">Detail</h4>
+                <h4 style="font-family: monospace;">Detail Peminjaman</h4>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -65,55 +63,58 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-5">
+        <div class="position-sticky" style="top: 1.5rem;">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4 style="font-family: monospace;">Update Status</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/peminjaman/update_stts" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="patch">
+                        <input type="hidden" name="kode" value="<?= $peminjam->kode_peminjaman ?>">
+                        <input type="hidden" name="kode_buku" value="<?= $peminjam->kode_buku ?>">
+                        <div class="form-group">
+                            <label class="control-label">Peminjaman Status</label>
+                            <select name="status" class="custom-select" id="ps">
+                                <option></option>
+                                <option <?= ($peminjam->peminjaman_status == "1") ? 'selected' : '' ?> value="1">Dikembalikan</option>
+                                <option <?= ($peminjam->peminjaman_status == "2") ? 'selected' : '' ?> value="2">Dipinjamkan</option>
+                                <option <?= ($peminjam->peminjaman_status == "3") ? 'selected' : '' ?> value="3">Proses</option>
+                                <option <?= ($peminjam->peminjaman_status == "0") ? 'selected' : '' ?> value="0">Ditolak</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-        <div class="card card-primary">
-            <div class="card-header">
-                <h4 style="font-family: monospace;">Update Status</h4>
-            </div>
-            <div class="card-body">
-                <form action="/peminjaman/update_stts" method="post">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="_method" value="patch">
-                    <input type="hidden" name="kode" value="<?= $peminjam->kode_peminjaman ?>">
-                    <input type="hidden" name="kode_buku" value="<?= $peminjam->kode_buku ?>">
-                    <div class="form-group">
-                        <label class="control-label">Peminjaman Status</label>
-                        <select name="status" class="custom-select" id="ps">
-                            <option></option>
-                            <option <?= ($peminjam->peminjaman_status == "1") ? 'selected' : '' ?> value="1">Dikembalikan</option>
-                            <option <?= ($peminjam->peminjaman_status == "2") ? 'selected' : '' ?> value="2">Dipinjamkan</option>
-                            <option <?= ($peminjam->peminjaman_status == "3") ? 'selected' : '' ?> value="3">Proses</option>
-                            <option <?= ($peminjam->peminjaman_status == "0") ? 'selected' : '' ?> value="0">Ditolak</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="card card-primary">
-            <div class="card-header">
-                <h4 style="font-family: monospace;">Update Peminjaman Buku</h4>
-            </div>
-            <div class="card-body">
-                <form action="/peminjaman/update" method="post">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="peminjaman" value="<?= $peminjam->id_peminjaman ?>">
-                    <input type="hidden" name="kode" value="<?= $peminjam->kode_peminjaman ?>">
-                    <div class="form-group">
-                        <label class="control-label">Tanggal Pinjam</label>
-                        <input type="date" name="tanggal_pinjam" class="form-control" value="<?= $peminjam->tanggal_pinjam ?>">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Tanggal Kembali</label>
-                        <input type="date" name="tanggal_kembali" class="form-control" value="<?= $peminjam->tanggal_kembali ?>">
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
-                    </div>
-                </form>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h4 style="font-family: monospace;">Update Peminjaman Buku</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/peminjaman/update" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="peminjaman" value="<?= $peminjam->id_peminjaman ?>">
+                        <input type="hidden" name="kode" value="<?= $peminjam->kode_peminjaman ?>">
+                        <div class="form-group">
+                            <label class="control-label">Tanggal Pinjam</label>
+                            <input type="date" name="tanggal_pinjam" class="form-control" value="<?= $peminjam->tanggal_pinjam ?>">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tanggal Kembali</label>
+                            <input type="date" name="tanggal_kembali" class="form-control" value="<?= $peminjam->tanggal_kembali ?>">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

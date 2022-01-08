@@ -32,13 +32,17 @@
     </div>
     <div class="col-12 col-md-12 col-lg-7">
         <div class="card">
+            <div class="card-header">
+                <h4>Edit Profile</h4>
+                <div class="card-header-action">
+                    <button class="btn btn-sm btn-warning sr<?= md5(md5($user->id)) ?>">change role</button>
+                    <a href="/user/delete/<?= $user->id ?>" class="btn btn-sm btn-danger ml-2">hapus</a>
+                </div>
+            </div>
             <form method="post" action="/user/edit" enctype="multipart/form-data" class="needs-validation">
                 <?= csrf_field() ?>
                 <input type="hidden" name="_method" value="PATCH">
                 <input type="hidden" name="id" value="<?= $user->id ?>">
-                <div class="card-header">
-                    <h4>Edit Profile</h4>
-                </div>
                 <div class="card-body">
                     <div class="form-group">
                         <label>Profile Picture</label>
@@ -134,6 +138,35 @@
     </div>
 </div>
 </div>
+
+<!-- Modal Set Role -->
+<div class="modal-part" id="ha<?= md5(md5(md5(md5($user->id)))) ?>">
+    <form action="/user/changeGroup" method="post">
+        <?= csrf_field() ?>
+        <input type="hidden" name="user_id" value="<?= $user->id ?>">
+        <div class="form-group">
+            <div class="control-center">Pilih Role</div>
+            <select name="group_id" id="role" class="custom-select">
+                <option>Pilih Role Baru</option>
+                <?php foreach ($groups as $g) : ?>
+                    <option value="<?= $g->id ?>"><?= $g->name ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".sr<?= md5(md5($user->id)) ?>").fireModal({
+            title: "Update Role <?= $user->username ?>",
+            body: $("#ha<?= md5(md5(md5(md5($user->id)))) ?>"),
+            center: true
+        })
+    })
+</script>
 
 <script>
     $(document).ready(function() {
