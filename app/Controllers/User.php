@@ -213,6 +213,7 @@ class User extends BaseController
                     "segment"       => $this->request->uri->getSegments(),
                     "validation"    => $this->validation,
                     "user"          => $this->user->getUserByUsername($uname),
+                    "groups"     => $this->group->findAll()
                 ];
 
                 return view('admin/user/detail', $data);
