@@ -1,6 +1,6 @@
 # Perpusid
-Aplikasi perpustakaan sederhana
+Aplikasi perpustakaan sederhana, tapi semoga bisa membantu dan menjadi referensi 
 
-## style
+## Big Thanks
 ---
-[**stisla**](https://www.stisla.com/)
+big thanks for [**stisla**](https://www.stisla.com/)
